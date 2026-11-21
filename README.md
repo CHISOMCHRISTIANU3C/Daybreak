@@ -1,5 +1,7 @@
 # Daybreak for Android
 
+**Update channel paused.** Google Play Protect blocked the in-app installation test as potentially harmful. The APK release was converted to a draft and the update channel was disabled. Do not bypass Play Protect to install this draft build. Repository creation, source upload, download verification, Android confirmation and cancellation preservation were verified; completed installation was not. The reason for the Play Protect verdict has not been established.
+
 Version 0.5.1 development build for Android 11 and later. The app bundles the black-and-white UI in a WebView, with Android alarm scheduling, audio playback and speech recognition implemented in Java. It does not require the localhost preview server.
 
 ## Install
@@ -55,7 +57,7 @@ The pose model and WebAssembly runtime are bundled, so the face and upper-body c
 ## Validation
 
 - Gradle `assembleDebug`, `lintDebug` and `testDebugUnitTest` pass. Lint reports nonblocking warnings, including synchronous persistence and WebView JavaScript usage.
-- Ten update-manifest tests cover the repository allowlist, HTTPS, package identity, checksum format, size limits, version format and redirect hosts. End-to-end update installation is being checked separately.
+- Ten update-manifest tests cover the repository allowlist, HTTPS, package identity, checksum format, size limits, version format and redirect hosts. The live update download, verification, Android confirmation and cancellation paths were checked on the emulator. Google Play Protect blocked installation after its scan, so the release is held as a draft and the channel is paused.
 - Six scheduling tests cover one-time alarms, weekday repeats, exact-minute rollover and both daylight-saving transitions.
 - Browser interaction checks verify tap-to-reveal fullscreen exit, immediate daily voice alarm saving, acknowledgment and confirmation events, duplicate suppression, spoken AM/PM clarification and rollback without false confirmation on save failure. Actual beep and speech audibility still need device testing.
 - Nine synthetic-landmark checks cover upper-body framing, missing face/shoulders and visible hand movement. A browser integration test passes the arm challenge and 15-second hold with legs outside frame, releases the camera, and verifies a missing face leads to a 30-second timeout. These checks do not replace real-camera accuracy testing.

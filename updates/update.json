@@ -1,10 +1,4 @@
 {
-  "packageName": "com.daybreak.clock",
-  "versionCode": 6,
-  "versionName": "0.5.1",
-  "minSdk": 30,
-  "size": 12734524,
-  "sha256": "8029f8f5629b5eb875f1029e6054a60af54ffdbae424c1e0251b94dfcb2aa285",
-  "apkUrl": "https://github.com/CHISOMCHRISTIANU3C/Daybreak/releases/download/v0.5.1/Daybreak.apk",
-  "notes": "Adds the built-in updater. Future versions can be downloaded and installed from Settings without finding an APK in chat."
+  "enabled": false,
+  "message": "Updates are paused pending review of the Google Play Protect verdict. No updater APK is currently offered."
 }
