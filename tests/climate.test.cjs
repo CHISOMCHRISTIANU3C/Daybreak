@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const context={window:{}};vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname,'../app/src/main/assets/ui/climate-core.js'),'utf8'),context);const core=context.window.DaybreakClimate,now=Date.now();
+assert.equal(core.indoor(null,null,now).value,null);assert.equal(core.indoor({supported:false,celsius:40,active:true,reliable:true,ageMs:0},null,now).value,null);
+assert.equal(core.indoor({supported:true,celsius:22.3,active:true,reliable:true,ageMs:100},null,now).value,22.3);
+assert.equal(core.indoor({supported:true,celsius:22.3,active:true,reliable:true,ageMs:400000},null,now).value,null);
+assert.equal(core.indoor({supported:true,celsius:22.3,active:true,reliable:false,ageMs:100},null,now).value,null);
+assert.equal(core.indoor(null,{value:19,time:now},now).source,'Manual thermometer reading');
+assert.equal(core.indoor(null,{value:19,time:now-3600001},now).value,null);
+assert.equal(core.indoor({supported:true,celsius:21,active:true,reliable:true,ageMs:100},{value:30,time:now},now).value,21);
+assert.equal(core.indoor({supported:true,celsius:-1e30,active:true,reliable:true,ageMs:0},null,now).value,null);assert.equal(core.indoor({supported:true,celsius:20,active:true,reliable:true,ageMs:-1},null,now).value,null);assert.equal(core.indoor({supported:true,celsius:22,active:true,reliable:true,onChange:true,ageMs:3600000},null,now).value,22);assert.equal(core.indoor({supported:true,celsius:22,active:false,reliable:true,onChange:true,ageMs:100},null,now).value,null);assert.equal(core.indoor({supported:false},null,now).source,'No room-temperature sensor');assert.equal(core.condition(75).kind,'snow');assert.equal(core.condition(61).kind,'rain');assert.equal(core.condition(0,false).label,'Clear night');
+assert(!core.advice({value:null},21).includes('thermostat'));console.log('Sensor-source, on-change stability, freshness, weather and advice checks passed');
