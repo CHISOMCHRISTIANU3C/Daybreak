@@ -1,0 +1,2 @@
+try{localStorage.setItem('daybreak',Android.load())}catch{}
+(()=>{let current=null;window.SpeechRecognition=class{start(){current=this;this.onstart?.();Android.startSpeech()}abort(){if(current===this){current=null;Android.stopSpeech()}}};window.nativeSpeechResult=text=>current?.onresult?.({resultIndex:0,results:[Object.assign([{transcript:text}],{isFinal:true})]});window.nativeSpeechError=error=>current?.onerror?.({error})})();
